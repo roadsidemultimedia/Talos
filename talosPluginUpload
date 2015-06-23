@@ -1,0 +1,12 @@
+#!/bin/sh
+##
+## run like so:
+## sh talosPluginUpload /PATH/TO/PLUGIN/ /PATH/TO/NEWLINE/DELIMITED/LIST/OF/SFTP/USERS/ SERVER SERVER_PORT
+##
+## example:
+## sh talosPluginUpload ~/foo/ ~/install-list.txt example.com 22
+##
+
+for USER in `cat ${2}`; do
+  lftp -e "mirror --reverse --delete --verbose ${1} /wp-content/plugins/" -u ${USER} -p${4} sftp://${3}
+done
