@@ -8,8 +8,8 @@
 ##
 
 for USER in `cat ${2}`; do
-  lftp -e "set net:reconnect-interval-multiplier 1; set net:reconnect-interval-base 1; set net:reconnect-interval-max 1; set net:timeout 2; set net:max-retries 1; mirror --reverse --delete --verbose ${1} /wp-content/plugins/" -u ${USER} -p${4} sftp://${3}
+  lftp -e "set net:reconnect-interval-multiplier 1; set net:reconnect-interval-base 1; set net:reconnect-interval-max 1; set net:max-retries 1; mirror --reverse --delete --verbose ${1} /wp-content/plugins/" -u ${USER} -p${4} sftp://${3}
   echo "$USER complete."
-  lftp -e "set net:reconnect-interval-multiplier 1; set net:reconnect-interval-base 1; set net:reconnect-interval-max 1; set net:timeout 2; set net:max-retries 1; mirror --reverse --delete --verbose ${1} /wp-content/plugins/" -u ${USER}-staging -p${4} sftp://${3}
+  lftp -e "set net:reconnect-interval-multiplier 1; set net:reconnect-interval-base 1; set net:reconnect-interval-max 1; set net:max-retries 1; mirror --reverse --delete --verbose ${1} /wp-content/plugins/" -u ${USER}-staging -p${4} sftp://${3}
   echo "$USER-staging complete."
 done
