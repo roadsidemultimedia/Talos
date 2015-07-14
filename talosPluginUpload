@@ -12,8 +12,8 @@ PASSWORD=${PASSWORD:-}
 for USER in `cat ${2}`; do
   lftp -c "open sftp://${3}:${4}
     user ${USER} ${PASSWORD}
-    set net:reconnect-interval-base 2
-    set net:reconnect-interval-max 2
+    set net:reconnect-interval-base 5
+    set net:reconnect-interval-max 5
     set net:max-retries 1
     mirror --reverse --delete --verbose ${1} /wp-content/plugins/"
   if [ $? = 0 ]; then
@@ -23,8 +23,8 @@ for USER in `cat ${2}`; do
   fi
   lftp -c "open sftp://${3}:${4}
     user ${USER}-staging ${PASSWORD}
-    set net:reconnect-interval-base 2
-    set net:reconnect-interval-max 2
+    set net:reconnect-interval-base 5
+    set net:reconnect-interval-max 5
     set net:max-retries 1
     mirror --reverse --delete --verbose ${1} /wp-content/plugins/"
   if [ $? = 0 ]; then
